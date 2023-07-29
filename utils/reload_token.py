@@ -14,8 +14,8 @@ import os
 from datetime import datetime
 from json import load, dump
 
-from google.oauth2.credentials import Credentials   # pylint: disable=import-error
-from google_auth_oauthlib.flow import (             # pylint: disable=import-error
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import (
     InstalledAppFlow,
     Flow,
 )
