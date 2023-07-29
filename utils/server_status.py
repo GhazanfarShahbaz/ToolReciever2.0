@@ -9,7 +9,7 @@ Edit Log:
 """
 
 import os
-import requests  # pylint: disable=import-error
+import requests
 
 
 def server_status() -> bool:
@@ -21,6 +21,6 @@ def server_status() -> bool:
     """
 
     url: str = os.getenv("BASE_URL")
-    header: requests.Response = requests.head(url)
+    header: requests.Response = requests.head(url=url, timeout=5)
 
     return header.status_code == 200
