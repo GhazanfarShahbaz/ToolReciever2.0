@@ -26,7 +26,7 @@ def check_update_json() -> bool:
     Checks the update json to see if it the credential json has been updated with the last week
 
     Returns:
-        'bool': True if the update json has been updated with the last week, otherwise false
+        `bool`: True if the update json has been updated with the last week, otherwise false
     """
     last_updated: datetime = None
 
@@ -48,11 +48,11 @@ def reload(
     current date if the credential file needs to be updated
 
     Args:
-        scopes 'list' : A list of google scopes
+        scopes `list` : A list of google scopes
 
-        token_file_name 'str' : The path to the token file. Defaults to env
+        token_file_name `str` : The path to the token file. Defaults to env
 
-        credential_file_name 'str': The path to credentials file. Defaults to env
+        credential_file_name `str` : The path to credentials file. Defaults to env
     """
 
     credentials: Credentials | None = (

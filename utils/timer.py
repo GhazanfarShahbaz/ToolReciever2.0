@@ -13,6 +13,8 @@ Edit Log:
 
 from time import time
 
+from stringcolor import cs as color
+
 
 class Timer:
     """
@@ -48,7 +50,8 @@ class Timer:
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb) -> None:
-        """Context manager exit method to calculate and print the total execution time.
+        """
+        Context manager exit method to calculate and print the total execution time.
 
         Args:
             exc_type:
@@ -57,7 +60,6 @@ class Timer:
                 The exception value (if any) raised in the with block.
             exc_tb:
                 The traceback object (if any) raised in the with block.
-
         """
 
         self.__time_function__()
@@ -67,7 +69,7 @@ class Timer:
         Callable method to decorate a function with execution time measurement.
 
         Args:
-            func (callable):
+            func `callable`:
                 The function to be decorated.
 
         Returns:
@@ -86,7 +88,7 @@ class Timer:
                     Arbitrary keyword arguments.
 
             Returns:
-                any:
+                `any`:
                     The result of the decorated function call.
             """
 
@@ -106,7 +108,7 @@ class Timer:
         Calculate and return the execution time of a function.
 
         Returns:
-            'float' :
+            `float` :
                 The execution time in seconds.
         """
 
@@ -114,4 +116,4 @@ class Timer:
         self.total_time += execution_time
 
         if self.print_time:
-            print(f"Execution time: {execution_time} seconds")
+            print(f"Execution time: {color(execution_time, 'green')} seconds")

@@ -17,7 +17,7 @@ def server_status() -> bool:
     Check if the server is running correctly, by pinging it
 
     Returns:
-        'bool': Returns true if server is running, false if not
+        `bool``: Returns true if server is running, false if not
     """
 
     url: str = os.getenv("BASE_URL")

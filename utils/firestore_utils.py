@@ -25,7 +25,7 @@ def get_base_request() -> dict:
     """Returns the base request for the server
 
     Returns:
-        'dict': A base request containing the username and password to the server
+        `dict``: A base request containing the username and password to the server
     """
 
     if not hasattr(get_base_request, "base_request"):
@@ -55,7 +55,8 @@ def get_base_request() -> dict:
 
 
 def update_firestore_login(fs_database: any, allow_login: bool) -> None:
-    """Update the Firestore login status.
+    """
+    Update the Firestore login status.
 
     Args:
         fs_database `any`: The Firestore database. If not provided, a new client will be created.
