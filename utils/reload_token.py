@@ -34,7 +34,7 @@ def check_update_json() -> bool:
         data = load(updated_json)
 
         last_updated = datetime.strptime(
-            __date_string=data["last_updated"], __format="%Y-%m-%d %H:%M:%S.%f"
+            data["last_updated"], "%Y-%m-%d %H:%M:%S.%f"
         )
 
     return (datetime.now() - last_updated).days < 7
