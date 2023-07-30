@@ -132,16 +132,16 @@ class Timer:
         """
 
         return round(time() - self.total_time, 4)
-    
-    def print_and_format_time(self, title_string: str, time = None) -> None:
+
+    def print_and_format_time(self, title_string: str, p_time=None) -> None:
         """
         Prints time in a formatted way.
         """
-        
-        if not time:
-            time = self.get_total_time()
-        
-        time_string: str = f"{color(f'{round(time, 4)}', 'green')} seconds"
+
+        if not p_time:
+            p_time = self.get_total_time()
+
+        time_string: str = f"{color(f'{round(p_time, 4)}', 'green')} seconds"
         title_string = color(title_string, "dodgerblue")
-    
+
         print(f"{title_string:<40} {time_string:>30}")
