@@ -121,7 +121,7 @@ class Timer:
         execution_time = round(time() - self.start_time, 4)
 
         if self.print_time:
-            print(f"Execution time: {color(execution_time, 'green')} seconds")
+            self.print_and_format_time("Execution time:", execution_time)
 
     def get_total_time(self) -> float:
         """
@@ -132,3 +132,16 @@ class Timer:
         """
 
         return round(time() - self.total_time, 4)
+    
+    def print_and_format_time(self, title_string: str, time = None) -> None:
+        """
+        Prints time in a formatted way.
+        """
+        
+        if not time:
+            time = self.get_total_time()
+        
+        time_string: str = f"{color(f'{round(time, 4)}', 'green')} seconds"
+        title_string = color(title_string, "dodgerblue")
+    
+        print(f"{title_string:<40} {time_string:>30}")
