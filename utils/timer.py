@@ -58,8 +58,6 @@ class Timer:
             exc_tb:
                 The traceback object (if any) raised in the with block.
 
-        Returns:
-            None
         """
 
         self.__time_function__()
@@ -73,7 +71,7 @@ class Timer:
                 The function to be decorated.
 
         Returns:
-            callable:
+            `callable`:
                 The decorated function.
         """
 
@@ -108,7 +106,7 @@ class Timer:
         Calculate and return the execution time of a function.
 
         Returns:
-            float:
+            'float' :
                 The execution time in seconds.
         """
 
