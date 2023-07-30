@@ -19,9 +19,12 @@ from stringcolor import cs as color
 class Timer:
     """
     A decorator class for measuring the execution time of a function.
+
+    NOTE:
+        TO update the total_time attribute you must add the @classmethod decorator
     """
 
-    total_time: float = 0
+    total_time: float = time()
 
     def __init__(self, print_time=False, print_response=False):
         """
@@ -112,8 +115,20 @@ class Timer:
                 The execution time in seconds.
         """
 
-        execution_time = time() - self.start_time
-        self.total_time += execution_time
+        if not self.total_time:
+            self.total_time = 0
+
+        execution_time = round(time() - self.start_time, 4)
 
         if self.print_time:
             print(f"Execution time: {color(execution_time, 'green')} seconds")
+
+    def get_total_time(self) -> float:
+        """
+        Calculate and return the total time.
+
+        Returns:
+            `float`: The total time in seconds.
+        """
+
+        return round(time() - self.total_time, 4)
