@@ -33,9 +33,7 @@ def check_update_json() -> bool:
     with open(os.getenv("UPDATED_JSON_PATH"), encoding="UTF-8") as updated_json:
         data = load(updated_json)
 
-        last_updated = datetime.strptime(
-            data["last_updated"], "%Y-%m-%d %H:%M:%S.%f"
-        )
+        last_updated = datetime.strptime(data["last_updated"], "%Y-%m-%d %H:%M:%S.%f")
 
     return (datetime.now() - last_updated).days < 7
 

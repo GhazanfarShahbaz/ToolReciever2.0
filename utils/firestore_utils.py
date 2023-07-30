@@ -40,11 +40,9 @@ def get_base_request() -> dict:
             ]
         )
 
-    fs_database = firestore.client()
-
-    update_firestore_login(fs_database, True)
-
     if not get_base_request.base_request:
+        fs_database = firestore.client()
+    
         users_ref = (
             fs_database.collection(getenv("FIRESTORE_SERVER"))
             .document(getenv("FIRESTORE_DOC_ID"))
@@ -68,9 +66,7 @@ def update_firestore_login(fs_database: any, allow_login: bool) -> None:
     if not fs_database:
         fs_database = firestore.client()
 
-    login_allow = fs_database.collection(
-        getenv("FIRESTORE_SERVER")
-    ).document("allow")
+    login_allow = fs_database.collection(getenv("FIRESTORE_SERVER")).document("allow")
 
     # change only only if allow_login is different from current value
     if login_allow.get().to_dict()["allow"] is not allow_login:
