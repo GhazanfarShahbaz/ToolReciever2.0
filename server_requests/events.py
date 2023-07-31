@@ -49,7 +49,7 @@ def get_default_events(args: Namespace) -> None:
         args `Namespace`: The namespace object containing parsed command-line arguments.
     """
 
-    base_request = setup_default_event_request(
+    base_request: dict = setup_default_event_request(
         RequestHandshake.base_request.copy(), args
     )
     results = post(
