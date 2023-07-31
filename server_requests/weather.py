@@ -72,7 +72,7 @@ def get_weather() -> None:
 
     results = post(
         f"{getenv('TOOLS_URL')}/getCurrentWeather",
-        json=RequestHandshake.base_request,
+        json=RequestHandshake.base_request.copy(),
         timeout=5
     ).json()
 
