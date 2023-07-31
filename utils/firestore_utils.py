@@ -12,6 +12,7 @@ Edit Log:
 
 from os import getenv
 from typing import Union
+from json import load
 
 from firebase_admin import credentials, firestore, initialize_app
 
@@ -42,7 +43,7 @@ def get_base_request() -> dict:
 
     if not get_base_request.base_request:
         fs_database = firestore.client()
-    
+
         users_ref = (
             fs_database.collection(getenv("FIRESTORE_SERVER"))
             .document(getenv("FIRESTORE_DOC_ID"))
@@ -72,3 +73,20 @@ def update_firestore_login(fs_database: any, allow_login: bool) -> None:
     # change only only if allow_login is different from current value
     if login_allow.get().to_dict()["allow"] is not allow_login:
         login_allow.update({"allow": allow_login})
+
+
+def read_token_file() -> dict:
+    """
+    Reads the token file and returns the tokens as a dict representing a json
+
+    Returns:
+        dict: representing the token file
+    """
+
+    token_path: str = getenv("TOKEN_PATH")
+    token: dict = {}
+
+    with open(token_path) as token_file:  # pylint: disable=unspecified-encoding
+        token = load(token_file)
+
+    return token
