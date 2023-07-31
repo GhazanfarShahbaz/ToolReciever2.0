@@ -38,8 +38,7 @@ class Timer:
                 Indicates whether to print the response of the function.
                 Defaults to False.
         """
-
-        self.start_time: float = time()
+        
         self.print_time: bool = print_time
         self.print_response: bool = print_response
 
@@ -49,6 +48,7 @@ class Timer:
         Returns:
             Timer: The Timer instance itself.
         """
+        self.start_time = time() 
 
         return self
 
@@ -94,7 +94,7 @@ class Timer:
                 `any`:
                     The result of the decorated function call.
             """
-
+            self.start_time = time()
             response: any = func(*args, **kwargs)
 
             if self.print_response:
@@ -137,7 +137,8 @@ class Timer:
         """
         Prints time in a formatted way.
         """
-
+        extra_line: bool = p_time is not None
+        
         if not p_time:
             p_time = self.get_total_time()
 
@@ -145,3 +146,5 @@ class Timer:
         title_string = color(title_string, "dodgerblue")
 
         print(f"{title_string:<40} {time_string:>30}")
+        if extra_line:
+            print()
