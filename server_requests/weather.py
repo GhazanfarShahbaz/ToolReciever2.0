@@ -116,5 +116,3 @@ def get_weather() -> None:
 
     if "snow" in results:
         print(results["snow"])
-
-    print()
