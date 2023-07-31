@@ -16,6 +16,7 @@ from typing import Dict, Callable
 
 from utils.timer import Timer
 
+from server_requests.emails import get_default_emails
 from server_requests.events import get_default_events
 from server_requests.weather import get_weather
 
@@ -29,16 +30,27 @@ PARSER.add_argument(
     type=str,
 )
 
+PARSER.add_argument(
+    "-dgm",
+    "--dgmail",
+    help="Get a list of default email snippets",
+    action="store_true",
+)
+
 PARSER.add_argument("-w", "--weather", help="Get todays weather", action="store_true")
 
 ARG_TO_FUNCTION: Dict[str, Dict[str, any]] = {
-    "weather": {
-        "function": get_weather,
-        "pass_args": False
-    },
     "default": {
         "function": get_default_events,
         "pass_args": True
+    },
+    "dgmail": {
+        "function": get_default_emails,
+        "pass_args": False
+    },
+    "weather": {
+        "function": get_weather,
+        "pass_args": False
     }
 }
 
