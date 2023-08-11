@@ -42,6 +42,7 @@ PARSER.add_argument(
     "-cf_d", "--cf_difficulty", help="Filter codechef by a difficulty", type=str
 )
 
+# EVENTS
 PARSER.add_argument(
     "-df",
     "--default",
@@ -49,6 +50,7 @@ PARSER.add_argument(
     type=str,
 )
 
+# EMAIL
 PARSER.add_argument(
     "-dgm",
     "--dgmail",
@@ -56,12 +58,15 @@ PARSER.add_argument(
     action="store_true",
 )
 
+# DIAGNOSTICS
 PARSER.add_argument(
     "-diagnostics", "--diagnostics", help="Show endpoint diagnostics", type=str
 )
 
+# EULER
 PARSER.add_argument("-euler", "--euler", help="Get a random euler question", type=str)
 
+# LOGS
 PARSER.add_argument("-gl", "--getlogs", help="Get today's Logs", action="store_true")
 
 # LEETCODE + ARGUMENTS
@@ -73,6 +78,7 @@ PARSER.add_argument(
 )
 PARSER.add_argument("-lc_t", "--lc_tag", help="Filter leetcode by a tag", type=str)
 
+# WEATHER
 PARSER.add_argument("-w", "--weather", help="Get todays weather", action="store_true")
 
 
