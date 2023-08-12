@@ -46,7 +46,7 @@ PARSER.add_argument(
 PARSER.add_argument(
     "-df",
     "--default",
-    help="Filter events by default options: today, weekly, month or year",
+    help="Filter events by default options: today, week, month or year",
     type=str,
 )
 
@@ -64,7 +64,7 @@ PARSER.add_argument(
 )
 
 # EULER
-PARSER.add_argument("-euler", "--euler", help="Get a random euler question", type=str)
+PARSER.add_argument("-euler", "--euler", help="Get a random euler question", action="store_true")
 
 # LOGS
 PARSER.add_argument("-gl", "--getlogs", help="Get today's Logs", action="store_true")
