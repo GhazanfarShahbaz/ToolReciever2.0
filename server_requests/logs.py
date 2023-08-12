@@ -13,6 +13,7 @@ from typing import List
 from os import getenv
 
 from requests import post
+from stringcolor import cs as color
 
 from utils.request_handshake import RequestHandshake
 from utils.timer import Timer
@@ -59,3 +60,5 @@ def get_logs() -> None:
         file_name: str = f"{app_name}_{current_date}.log"
 
         write_log_file(file_name, logs)
+
+    print(color("Successfully saved logs.", "dodgerblue"))
