@@ -1,13 +1,15 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.4.0
+    rev: v4.4.0
     hooks:
+      - id: check-ast
       - id: check-docstring-first
       - id: check-merge-conflict
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-ast
+      - id: name-tests-test
   - repo: https://github.com/ambv/black
     rev: 20.8b1
     hooks:
