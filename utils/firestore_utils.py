@@ -3,8 +3,8 @@ file_name = firestore_utils.py
 Creator: Ghazanfar Shahbaz
 Last Updated: 07/30/2023
 Description: A file used to interact with firestore
-Edit Log: 
-07/30/2023 
+Edit Log:
+07/30/2023
     - Moved over file from original tool receiver
     - Modularized preexisting code from original tool receiver
     - Remove global variable with static class variable
@@ -21,6 +21,7 @@ from utils.reload_token import reload
 
 CREDENTIALS: Union[str, None] = credentials.Certificate(getenv("FIRESTORE_PATH"))
 initialize_app(CREDENTIALS)
+
 
 def get_base_request() -> dict:
     """Returns the base request for the server

@@ -1,39 +1,32 @@
 """
 file_name = request_handshake.py
-Created On: 2023/11/12
-Lasted Updated: 2023/11/12
-Description: _FILL OUT HERE_
+Creator: Ghazanfar Shahbaz
+Last Updated: 07/30/2023
+Description: A file used to create a handshake decorator and context manger
+    for functions
 Edit Log:
-2023/11/12
-    - Created file
+07/30/2023
+    - Created file, speed up from the original tool receiver by almost 100%
 """
 
-# STANDARD LIBRARY IMPORTS
-from os import getenv
+from firebase_admin import firestore
 
-# THIRD PARTY LIBRARY IMPORTS
-from requests import post
+from utils.firestore_utils import get_base_request, update_firestore_login
 
 
-# LOCAL LIBRARY IMPORTS
-from utils.firestore_utils import get_base_request
-
-
-class RequestHandshake:
+class LegacyRequestHandshake:
     """
     A class that represents a handshake for making requests.
     """
 
-    base_request = post(
-        url=f"{getenv('TOOLS_URL')}/grantAuthenticationToken",
-        json=get_base_request(),
-        timeout=5,
-    ).json()
+    base_request: dict = get_base_request()
 
     def __init__(self):
         """
         Initialize a new instance of RequestHandshake class.
         """
+
+        self.fs_database = firestore.client()
 
     def __enter__(self) -> "RequestHandshake":
         """
@@ -43,6 +36,8 @@ class RequestHandshake:
             `RequestHandshake`:
                 The current instance of `RequestHandshake`.
         """
+
+        update_firestore_login(self.fs_database, True)
 
     def __exit__(self, exc_type, exc_val, exc_tb) -> None:
         """
@@ -56,6 +51,8 @@ class RequestHandshake:
             exc_tb:
                 The traceback of the exception.
         """
+
+        update_firestore_login(self.fs_database, False)
 
     def __call__(self, func):
         """
@@ -83,6 +80,7 @@ class RequestHandshake:
                     The result of the decorated function call.
             """
 
+            update_firestore_login(self.fs_database, True)
             return func(*args, **kwargs)
             # We do not need to close the connection, the server will do that for us
 

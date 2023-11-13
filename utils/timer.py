@@ -3,8 +3,8 @@ file_name = timer.py
 Creator: Ghazanfar Shahbaz
 Last Updated: 07/29/2023
 Description: A file used to time functions
-Edit Log: 
-07/29/2023 
+Edit Log:
+07/29/2023
     - Created timing decorator class logic
 07/30/2023
     - Documented code
@@ -38,9 +38,11 @@ class Timer:
                 Indicates whether to print the response of the function.
                 Defaults to False.
         """
-        
+
         self.print_time: bool = print_time
         self.print_response: bool = print_response
+
+        self.start_time = None
 
     def __enter__(self) -> "Timer":
         """Context manager enter method that returns the Timer instance.
@@ -48,7 +50,7 @@ class Timer:
         Returns:
             Timer: The Timer instance itself.
         """
-        self.start_time = time() 
+        self.start_time = time()
 
         return self
 
@@ -106,7 +108,7 @@ class Timer:
 
         return wrapper
 
-    def __time_function__(self) -> float:
+    def __time_function__(self) -> None:
         """
         Calculate and return the execution time of a function.
 
@@ -138,7 +140,7 @@ class Timer:
         Prints time in a formatted way.
         """
         extra_line: bool = p_time is not None
-        
+
         if not p_time:
             p_time = self.get_total_time()
 

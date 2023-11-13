@@ -3,8 +3,8 @@ file_name = reload_token.py
 Creator: Ghazanfar Shahbaz
 Last Updated: 07/29/2023
 Description: A file used to reload and check the status of the credential token
-Edit Log: 
-07/29/2023 
+Edit Log:
+07/29/2023
     - Moved over file from original tool receiver
     - Better formatted and documented code
 """
@@ -28,7 +28,7 @@ def check_update_json() -> bool:
     Returns:
         `bool`: True if the update json has been updated with the last week, otherwise false
     """
-    last_updated: datetime = None
+    last_updated: datetime | None = None
 
     with open(os.getenv("UPDATED_JSON_PATH"), encoding="UTF-8") as updated_json:
         data = load(updated_json)
