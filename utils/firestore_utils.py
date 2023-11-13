@@ -12,7 +12,8 @@ Edit Log:
 
 from os import getenv
 from typing import Union
-from json import load
+from json import load, dump
+from requests import post
 
 from firebase_admin import credentials, firestore, initialize_app
 
@@ -91,3 +92,60 @@ def read_token_file() -> dict:
         token = load(token_file)
 
     return token
+
+
+def get_authentication_base_request() -> dict:
+    """
+    Gets the authentication base request.
+
+    If authentication is not stale then returns quick,
+    otherwise requests for a new one and updates the cache.
+
+    Returns:
+        dict:   A dictionary representing the authentication base request it
+                contains a username and a token.
+    """
+
+    def read_cache() -> dict:
+        data = {}
+
+        with open(getenv("HANDSHAKE_CACHE_PATH"), encoding="UTF-8") as updated_json:
+            data = load(updated_json)
+
+        return data
+
+    def save_cache(handshake_cache) -> None:
+        with open(
+            file=getenv("HANDSHAKE_CACHE_PATH"), mode="w", encoding="UTF-8"
+        ) as token:
+            dump(handshake_cache, token, default=str)
+
+    try:
+        validation_json = post(
+            url=f"{getenv('TOOLS_URL')}/validateAuthenticationToken",
+            json=read_cache(),
+            timeout=5,
+        ).json()
+
+        if validation_json["ErrorCode"] == 0:
+            return validation_json
+
+    except Exception as exception:  # pylint: disable=broad-exception-caught
+        print("Old cache stale, getting new token", exception)
+
+    base_request = get_base_request()
+
+    authentication_json = post(
+        url=f"{getenv('TOOLS_URL')}/grantAuthenticationToken",
+        json=get_base_request(),
+        timeout=5,
+    ).json()
+
+    handshake_json = {
+        "username": base_request["username"],
+        "token": authentication_json["token"],
+    }
+
+    save_cache(handshake_json)
+
+    return handshake_json
